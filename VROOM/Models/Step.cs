@@ -56,7 +56,6 @@ namespace VROOM
         public Coordinate? Location { get; set; }
         /// <summary>
         /// index of relevant row and column in custom matrices for this step (if provided in input)
-.
         /// </summary>
         [JsonProperty("location_index")]
         public int? LocationIndex { get; set; }

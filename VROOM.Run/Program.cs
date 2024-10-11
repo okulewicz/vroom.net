@@ -69,7 +69,17 @@ namespace VROOM.Run
 
             var result = await apiClient.PerformRequest(input);
 
-            // do something with the result...
+            if (result.WasSuccessful)
+            {
+                foreach (var route in result.Routes)
+                {
+                    Console.WriteLine($"Route {route.VehicleId}");
+                    foreach (var step in route.Steps)
+                    {
+                        Console.WriteLine($"{step.StepType} {step.LocationIndex}");
+                    }
+                }
+            }
         }
         static void Main(string[] args)
         {
