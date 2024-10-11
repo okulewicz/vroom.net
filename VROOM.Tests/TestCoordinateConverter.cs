@@ -31,14 +31,8 @@ namespace VROOM.Tests
             
             using TextReader reader = new StreamReader(stream);
             string result = reader.ReadToEnd();
-
-            string formattedLon = lon.ToString("0.############", CultureInfo.InvariantCulture);
-            formattedLon = formattedLon.Contains(".") ? formattedLon.TrimEnd('0').TrimEnd('.') : formattedLon;
-            string formattedLat = lat.ToString("0.############", CultureInfo.InvariantCulture);
-            formattedLat = formattedLat.Contains(".") ? formattedLat.TrimEnd('0').TrimEnd('.') : formattedLat;
-
-
-            result.Should().Be($"[{formattedLon},{formattedLat}]");
+            
+            result.Should().Be($"[{lon.ToString(CultureInfo.InvariantCulture)},{lat.ToString(CultureInfo.InvariantCulture)}]");
         }
 
         [TestMethod]
