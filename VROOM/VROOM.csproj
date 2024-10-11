@@ -3,14 +3,19 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Authors>Caleb Faith</Authors>
-        <PackageId>VROOM.NET</PackageId>
-        <Title>VROOM.NET</Title>
-        <Description>VROOM .NET is a simple API client for vroom-express https://github.com/VROOM-Project/vroom-express which covers 100% of the API.</Description>
+		<VersionPrefix>1.0.0</VersionPrefix>
+        <Authors>Caleb Faith, Michał Okulewicz</Authors>
+        <PackageId>VROOM.NET.2.0</PackageId>
+        <Title>Port of VROOM.NET for .NET Standard 2.0+</Title>
+        <Description>
+			VROOM .NET is a simple API client for vroom-express https://github.com/VROOM-Project/vroom-express which covers 100% of the API.
+			Original VROOM.NET was created by Caleb Faith and can be found at https://github.com/okulewicz/vroom.net
+			This is just a port utilizing Newtosoft.Json which made it available to use in .NET Standard 2.0+.
+		</Description>
         <Copyright>Caleb Faith</Copyright>
-        <PackageProjectUrl>https://github.com/calebfaith/vroom.net</PackageProjectUrl>
-        <PackageLicenseUrl>https://github.com/calebfaith/vroom.net/blob/master/License</PackageLicenseUrl>
-        <RepositoryUrl>https://github.com/calebfaith/vroom.net</RepositoryUrl>
+        <PackageProjectUrl>https://github.com/okulewicz/vroom.net</PackageProjectUrl>
+        <PackageLicenseUrl>https://github.com/okulewicz/vroom.net/blob/master/License</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/okulewicz/vroom.net</RepositoryUrl>
         <PackageTags>vroom, routing, logistics, directions, optimisation</PackageTags>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     </PropertyGroup>
