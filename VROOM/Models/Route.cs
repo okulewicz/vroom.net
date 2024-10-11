@@ -29,22 +29,19 @@ namespace VROOM
         /// Total service time for this route.
         /// </summary>
         [JsonProperty("service")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan Service { get; set; }
+        public int Service { get; set; }
 
         /// <summary>
         /// Total travel time for this route.
         /// </summary>
         [JsonProperty("duration")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
 
         /// <summary>
         /// Total waiting time for this route.
         /// </summary>
         [JsonProperty("waiting_time")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan WaitingTime { get; set; }
+        public int WaitingTime { get; set; }
 
         /// <summary>
         /// Total priority sum for tasks in this route.

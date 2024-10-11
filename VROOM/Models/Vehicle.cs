@@ -33,7 +33,7 @@ namespace VROOM
         /// The start index of the vehicle in custom matrices. Only needed if supplying custom matrix.
         /// </summary>
         [JsonProperty("start_index")]
-        public MatrixIndex? StartIndex { get; set; }
+        public int? StartIndex { get; set; }
 
         /// <summary>
         /// The end coordinate of the vehicle.
@@ -45,7 +45,7 @@ namespace VROOM
         /// The end index of the vehicle in custom matrices. Only needed if supplying custom matrix.
         /// </summary>
         [JsonProperty("end_index")]
-        public MatrixIndex? EndIndex { get; set; }
+        public int? EndIndex { get; set; }
 
         /// <summary>
         /// List of integers describing multidimensional qualities.

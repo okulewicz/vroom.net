@@ -27,6 +27,6 @@ namespace VROOM
         /// Optional description of per-profile custom matrices. Key is vehicle profile type.
         /// </summary>
         [JsonProperty("matrices")]
-        public Dictionary<string, Matrice> Matrices { get; set; }
+        public Dictionary<string, Matrix> Matrices { get; set; }
     }
 }

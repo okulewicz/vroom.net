@@ -29,7 +29,6 @@ namespace VROOM
         /// The break duration (in VROOM this is "service").
         /// </summary>
         [JsonProperty("service")]
-        [JsonConverter(typeof(NullableTimeSpanSecondsToIntConverter))]
-        public TimeSpan? Duration { get; set; }
+        public int Duration { get; set; }
     }
 }

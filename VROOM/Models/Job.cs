@@ -29,14 +29,13 @@ namespace VROOM
         /// Index of relevant row and column in custom matrices. Only needed if supplying custom matrix.
         /// </summary>
         [JsonProperty("location_index")]
-        public MatrixIndex? LocationIndex { get; set; }
+        public int? LocationIndex { get; set; }
         
         /// <summary>
         /// Job service duration. In VROOM this is the "service" property.
         /// </summary>
         [JsonProperty("service")]
-        [JsonConverter(typeof(NullableTimeSpanSecondsToIntConverter))]
-        public TimeSpan? Duration { get; set; }
+        public int? Duration { get; set; }
         
         /// <summary>
         /// List of ints describing multidimensional quantities for delivery.

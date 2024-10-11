@@ -29,14 +29,13 @@ namespace VROOM
         /// Index of relevant row and column in custom matrices. Only needed if supplying custom matrix.
         /// </summary>
         [JsonProperty("location_index")]
-        public MatrixIndex? LocationIndex { get; set; }
+        public int? LocationIndex { get; set; }
         
         /// <summary>
         /// Shipment step service duration.
         /// </summary>
         [JsonProperty("service")]
-        [JsonConverter(typeof(NullableTimeSpanSecondsToIntConverter))]
-        public TimeSpan? Service { get; set; }
+        public int Service { get; set; }
         
         /// <summary>
         /// List of timewindows describing valid slots for job service start.

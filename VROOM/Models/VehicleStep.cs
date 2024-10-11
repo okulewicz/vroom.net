@@ -23,21 +23,18 @@ namespace VROOM
         /// Hard constraint on service time.
         /// </summary>
         [JsonProperty("service_at")]
-        [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
-        public DateTimeOffset? ServiceAt { get; set; }
+        public int? ServiceAt { get; set; }
         
         /// <summary>
         /// Hard constraint on service time lower bound.
         /// </summary>
         [JsonProperty("service_after")]
-        [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
-        public DateTimeOffset? ServiceAfter { get; set; }
+        public int? ServiceAfter { get; set; }
         
         /// <summary>
         /// Hard constraint on service time upper bound.
         /// </summary>
         [JsonProperty("service_before")]
-        [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
-        public DateTimeOffset? ServiceBefore { get; set; }
+        public int? ServiceBefore { get; set; }
     }
 }

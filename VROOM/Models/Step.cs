@@ -17,29 +17,25 @@ namespace VROOM
         /// Estimated time of arrival at this step.
         /// </summary>
         [JsonProperty("arrival")]
-        [JsonConverter(typeof(DateTimeOffsetToUnixConverter))]
-        public DateTimeOffset Arrival { get; set; }
+        public int Arrival { get; set; }
         
         /// <summary>
         /// Cumulated travel time upon arrival at this step.
         /// </summary>
         [JsonProperty("duration")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan Duration { get; set; }
+        public int Duration { get; set; }
         
         /// <summary>
         /// Service time at this step.
         /// </summary>
         [JsonProperty("service")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan Service { get; set; }
+        public int Service { get; set; }
         
         /// <summary>
         /// Waiting time upon arrival at this step.
         /// </summary>
         [JsonProperty("waiting_time")]
-        [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
-        public TimeSpan WaitingTime { get; set; }
+        public int WaitingTime { get; set; }
         
         /// <summary>
         /// List of violation objects for this step.

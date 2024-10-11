@@ -4,7 +4,7 @@ using VROOM.Converters;
 
 namespace VROOM
 {
-    [JsonConverter(typeof(StringEnumConverter<StepType>))]
+    //[JsonConverter(typeof(StringEnumConverter<StepType>))]
     public enum StepType
     {
         [EnumMember(Value = "start")]
