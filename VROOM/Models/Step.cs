@@ -54,13 +54,7 @@ namespace VROOM
         /// </summary>
         [JsonProperty("location")]
         public Coordinate? Location { get; set; }
-        /// <summary>
-        /// index of relevant row and column in custom matrices for this step (if provided in input)
-.
-        /// </summary>
-        [JsonProperty("location_index")]
-        public int? LocationIndex { get; set; }
-
+        
         /// <summary>
         /// Id of the task performed at this step.
         /// Only provided if type value is job, pickup, delivery or break.
