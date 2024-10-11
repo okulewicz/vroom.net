@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Text.Json;
@@ -30,7 +31,7 @@ namespace VROOM.Tests
             using TextReader reader = new StreamReader(stream);
             string result = reader.ReadToEnd();
             
-            result.Should().Be($"[{lon},{lat}]");
+            result.Should().Be($"[{lon.ToString(CultureInfo.InvariantCulture)},{lat.ToString(CultureInfo.InvariantCulture)}]");
         }
 
         [TestMethod]
