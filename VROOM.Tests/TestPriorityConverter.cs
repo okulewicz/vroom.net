@@ -43,10 +43,9 @@ namespace VROOM.Tests
             PriorityConverter converter = new PriorityConverter();
 
             var reader = new JsonTextReader(new StringReader(val.ToString()));
-            reader.Read();
             var result = converter.ReadJson(reader, typeof(Priority), null, new JsonSerializer());
 
-            result.Should().Be(val);
+            result.Should().Be(new Priority(val));
         }
     }
 }

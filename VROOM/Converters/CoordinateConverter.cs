@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Globalization;
 using System.Threading;
 
 namespace VROOM.Converters
@@ -13,10 +14,8 @@ namespace VROOM.Converters
                 throw new JsonException("Failed converting coordinate.");
             }
 
-            reader.Read();
-            double lon = (double)reader.Value;
-            reader.Read();
-            double lat = (double)reader.Value;
+            double lon = (double)reader.ReadAsDouble();
+            double lat = (double)reader.ReadAsDouble();
 
             reader.Read();
             if (reader.TokenType != JsonToken.EndArray)
@@ -30,8 +29,8 @@ namespace VROOM.Converters
         public override void WriteJson(JsonWriter writer, Coordinate value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
-            writer.WriteValue(value.Longitude);
-            writer.WriteValue(value.Latitude);
+            writer.WriteRawValue(value.Longitude.ToString(CultureInfo.InvariantCulture));
+            writer.WriteRawValue(value.Latitude.ToString(CultureInfo.InvariantCulture));
             writer.WriteEndArray();
         }
     }
