@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
-using System.Text.Json.Serialization;
 using VROOM.Converters;
 
 namespace VROOM
@@ -10,33 +10,33 @@ namespace VROOM
         /// <summary>
         /// The vehicle step type.
         /// </summary>
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public StepType Type { get; set; }
         
         /// <summary>
         /// The id of the task to be performed at this step.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public uint? TaskId { get; set; }
         
         /// <summary>
         /// Hard constraint on service time.
         /// </summary>
-        [JsonPropertyName("service_at")]
+        [JsonProperty("service_at")]
         [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
         public DateTimeOffset? ServiceAt { get; set; }
         
         /// <summary>
         /// Hard constraint on service time lower bound.
         /// </summary>
-        [JsonPropertyName("service_after")]
+        [JsonProperty("service_after")]
         [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
         public DateTimeOffset? ServiceAfter { get; set; }
         
         /// <summary>
         /// Hard constraint on service time upper bound.
         /// </summary>
-        [JsonPropertyName("service_before")]
+        [JsonProperty("service_before")]
         [JsonConverter(typeof(NullableDateTimeOffsetToUnixConverter))]
         public DateTimeOffset? ServiceBefore { get; set; }
     }

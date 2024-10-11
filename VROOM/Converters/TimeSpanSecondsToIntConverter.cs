@@ -1,19 +1,24 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace VROOM.Converters
 {
     public class TimeSpanSecondsToIntConverter : JsonConverter<TimeSpan>
     {
-        public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeSpan ReadJson(JsonReader reader, Type objectType, TimeSpan existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            return new TimeSpan(0, 0, reader.GetInt32());
+            if (reader.TokenType != JsonToken.Integer)
+            {
+                throw new JsonException("Expected integer for TimeSpan conversion.");
+            }
+
+            int seconds = Convert.ToInt32(reader.Value);
+            return new TimeSpan(0, 0, seconds);
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, TimeSpan value, JsonSerializer serializer)
         {
-            writer.WriteNumberValue((int)Math.Round(value.TotalSeconds));
+            writer.WriteValue((int)Math.Round(value.TotalSeconds));
         }
     }
 }

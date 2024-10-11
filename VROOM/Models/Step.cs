@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using VROOM.Converters;
 
 namespace VROOM
@@ -10,72 +10,72 @@ namespace VROOM
         /// <summary>
         /// The step type.
         /// </summary>
-        [JsonPropertyName("type")]
+        [JsonProperty("type")]
         public StepType StepType { get; set; }
         
         /// <summary>
         /// Estimated time of arrival at this step.
         /// </summary>
-        [JsonPropertyName("arrival")]
+        [JsonProperty("arrival")]
         [JsonConverter(typeof(DateTimeOffsetToUnixConverter))]
         public DateTimeOffset Arrival { get; set; }
         
         /// <summary>
         /// Cumulated travel time upon arrival at this step.
         /// </summary>
-        [JsonPropertyName("duration")]
+        [JsonProperty("duration")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan Duration { get; set; }
         
         /// <summary>
         /// Service time at this step.
         /// </summary>
-        [JsonPropertyName("service")]
+        [JsonProperty("service")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan Service { get; set; }
         
         /// <summary>
         /// Waiting time upon arrival at this step.
         /// </summary>
-        [JsonPropertyName("waiting_time")]
+        [JsonProperty("waiting_time")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan WaitingTime { get; set; }
         
         /// <summary>
         /// List of violation objects for this step.
         /// </summary>
-        [JsonPropertyName("violations")]
-        public List<Violation>? Violations { get; set; }
+        [JsonProperty("violations")]
+        public List<Violation> Violations { get; set; }
         
         /// <summary>
         /// Step description, if provided in input.
         /// </summary>
-        [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
         
         /// <summary>
         /// Coordinates for this step, if provided in input.
         /// </summary>
-        [JsonPropertyName("location")]
+        [JsonProperty("location")]
         public Coordinate? Location { get; set; }
         
         /// <summary>
         /// Id of the task performed at this step.
         /// Only provided if type value is job, pickup, delivery or break.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public uint? Id { get; set; }
         
         /// <summary>
         /// Vehicle load after step completion (with capacity constraints).
         /// </summary>
-        [JsonPropertyName("load")]
-        public List<int>? Load { get; set; }
+        [JsonProperty("load")]
+        public List<int> Load { get; set; }
         
         /// <summary>
         /// Traveled distance upon arrival at this step. Provided when using the -g flag.
         /// </summary>
-        [JsonPropertyName("distance")]
+        [JsonProperty("distance")]
         public int? Distance { get; set; }
     }
 }

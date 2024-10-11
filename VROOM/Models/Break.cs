@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using VROOM.Converters;
 
 namespace VROOM
@@ -10,25 +10,25 @@ namespace VROOM
         /// <summary>
         /// The break Id.
         /// </summary>
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public uint Id { get; set; }
 
         /// <summary>
         /// A description of the break.
         /// </summary>
-        [JsonPropertyName("description")]
-        public string? Description { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
 
         /// <summary>
         /// A list of TimeWindows describing valid slots for break start.
         /// </summary>
-        [JsonPropertyName("time_windows")]
-        public List<TimeWindow>? TimeWindows { get; set; }
+        [JsonProperty("time_windows")]
+        public List<TimeWindow> TimeWindows { get; set; }
         
         /// <summary>
         /// The break duration (in VROOM this is "service").
         /// </summary>
-        [JsonPropertyName("service")]
+        [JsonProperty("service")]
         [JsonConverter(typeof(NullableTimeSpanSecondsToIntConverter))]
         public TimeSpan? Duration { get; set; }
     }

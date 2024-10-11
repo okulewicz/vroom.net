@@ -1,19 +1,19 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace VROOM.Converters
 {
     public class PriorityConverter : JsonConverter<Priority>
     {
-        public override Priority Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+
+        public override Priority ReadJson(JsonReader reader, Type objectType, Priority existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            return reader.GetInt32();
+            return (Priority)reader.ReadAsInt32();
         }
 
-        public override void Write(Utf8JsonWriter writer, Priority value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, Priority value, JsonSerializer serializer)
         {
-            writer.WriteNumberValue(value.Value);
+            writer.WriteValue(value.Value);
         }
     }
 }

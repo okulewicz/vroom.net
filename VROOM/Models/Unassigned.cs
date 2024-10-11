@@ -1,16 +1,16 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace VROOM
 {
     public class Unassigned
     {
-        [JsonPropertyName("id")]
+        [JsonProperty("id")]
         public uint Id { get; set; }
         
-        [JsonPropertyName("type")]
-        public string? Type { get; set; }
+        [JsonProperty("type")]
+        public string Type { get; set; }
         
-        [JsonPropertyName("location")]
+        [JsonProperty("location")]
         public Coordinate? Location { get; set; }
     }
 }

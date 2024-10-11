@@ -1,26 +1,25 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 using System.Threading;
 
 namespace VROOM.Converters
 {
     public class CoordinateConverter : JsonConverter<Coordinate>
     {
-        public override Coordinate Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Coordinate ReadJson(JsonReader reader, Type objectType, Coordinate existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType != JsonTokenType.StartArray)
+            if (reader.TokenType != JsonToken.StartArray)
             {
                 throw new JsonException("Failed converting coordinate.");
             }
 
             reader.Read();
-            double lon = reader.GetDouble();
+            double lon = (double)reader.Value;
             reader.Read();
-            double lat = reader.GetDouble();
+            double lat = (double)reader.Value;
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.EndArray)
+            if (reader.TokenType != JsonToken.EndArray)
             {
                 throw new JsonException("Failed converting coordinate.");
             }
@@ -28,11 +27,11 @@ namespace VROOM.Converters
             return new Coordinate(lon, lat);
         }
 
-        public override void Write(Utf8JsonWriter writer, Coordinate value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, Coordinate value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
-            writer.WriteNumberValue(value.Longitude);
-            writer.WriteNumberValue(value.Latitude);
+            writer.WriteValue(value.Longitude);
+            writer.WriteValue(value.Latitude);
             writer.WriteEndArray();
         }
     }

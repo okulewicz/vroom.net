@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VROOM.Converters;
@@ -27,18 +26,16 @@ namespace VROOM.Tests
 
             foreach (var value in TestValues)
             {
-                using MemoryStream stream = new MemoryStream();
-                using Utf8JsonWriter writer = new Utf8JsonWriter(stream);
+                StringBuilder sb = new StringBuilder();
+                using StringWriter sw = new StringWriter(sb);
+                using JsonTextWriter writer = new JsonTextWriter(sw);
 
-                converter.Write(writer, value, new JsonSerializerOptions());
+                converter.WriteJson(writer, value, new JsonSerializer());
 
                 writer.Flush();
-                stream.Position = 0;
+                string result = sb.ToString();
 
-                using TextReader reader = new StreamReader(stream);
-                string result = reader.ReadToEnd();
-
-                result.Should().Be(value == null ? "null" : ((int) Math.Round(value.Value.TotalSeconds)).ToString());
+                result.Should().Be(value == null ? "null" : ((int)Math.Round(value.Value.TotalSeconds)).ToString());
             }
         }
 
@@ -48,10 +45,10 @@ namespace VROOM.Tests
             NullableTimeSpanSecondsToIntConverter converter = new NullableTimeSpanSecondsToIntConverter();
             foreach (var value in TestValues)
             {
-                Utf8JsonReader reader =
-                    new Utf8JsonReader(Encoding.UTF8.GetBytes(value == null ? "null" : ((int) Math.Round(value.Value.TotalSeconds)).ToString()));
+                string json = value == null ? "null" : ((int)Math.Round(value.Value.TotalSeconds)).ToString();
+                using JsonTextReader reader = new JsonTextReader(new StringReader(json));
                 reader.Read();
-                var result = converter.Read(ref reader, typeof(TimeSpan?), new JsonSerializerOptions());
+                var result = converter.ReadJson(reader, typeof(TimeSpan?), null, new JsonSerializer());
 
                 result.Should().Be(value);
             }

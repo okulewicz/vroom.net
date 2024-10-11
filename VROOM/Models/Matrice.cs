@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace VROOM
 {
     public class Matrice
     {
-        [JsonPropertyName("durations")]
+        [JsonProperty("durations")]
         public int[][] Durations { get; set; } 
     }
 }

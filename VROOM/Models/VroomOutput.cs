@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace VROOM
 {
@@ -11,31 +11,31 @@ namespace VROOM
         /// <summary>
         /// Status code.
         /// </summary>
-        [JsonPropertyName("code")]
+        [JsonProperty("code")]
         public OutputCode Code { get; set; }
         
         /// <summary>
         /// Error message. Present if code is different from 0.
         /// </summary>
-        [JsonPropertyName("error")]
-        public string? Error { get; set; }
+        [JsonProperty("error")]
+        public string Error { get; set; }
         
         /// <summary>
         /// Object summarising solution indicators.
         /// </summary>
-        [JsonPropertyName("summary")]
+        [JsonProperty("summary")]
         public Summary Summary { get; set; }
         
         /// <summary>
         /// List of objects describing unassigned tasks with their id, type and location (if provided).
         /// </summary>
-        [JsonPropertyName("unassigned")]
-        public List<Unassigned>? Unassigned { get; set; }
+        [JsonProperty("unassigned")]
+        public List<Unassigned> Unassigned { get; set; }
         
         /// <summary>
         /// List of route objects.
         /// </summary>
-        [JsonPropertyName("routes")]
+        [JsonProperty("routes")]
         public List<Route> Routes { get; set; }
     }
 }

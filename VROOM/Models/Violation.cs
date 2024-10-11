@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace VROOM
 {
@@ -8,10 +8,10 @@ namespace VROOM
         /// <summary>
         /// The cause of the violation.
         /// </summary>
-        [JsonPropertyName("cause")]
+        [JsonProperty("cause")]
         public ViolationCause Cause { get; set; }
         
-        [JsonPropertyName("duration")]
+        [JsonProperty("duration")]
         public double Duration { get; set; }
     }
 }

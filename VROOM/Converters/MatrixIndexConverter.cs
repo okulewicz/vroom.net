@@ -1,26 +1,25 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 using System.Threading;
 
 namespace VROOM.Converters
 {
     public class MatrixIndexConverter : JsonConverter<MatrixIndex>
     {
-        public override MatrixIndex Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override MatrixIndex ReadJson(JsonReader reader, Type objectType, MatrixIndex existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType != JsonTokenType.StartArray)
+            if (reader.TokenType != JsonToken.StartArray)
             {
                 throw new JsonException("Failed converting MatrixIndex.");
             }
 
             reader.Read();
-            int row = reader.GetInt32();
+            int row = (int)(long)reader.Value; // Cast to long first because reader.Value is of type object
             reader.Read();
-            int col = reader.GetInt32();
+            int col = (int)(long)reader.Value;
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.EndArray)
+            if (reader.TokenType != JsonToken.EndArray)
             {
                 throw new JsonException("Failed converting MatrixIndex.");
             }
@@ -28,11 +27,11 @@ namespace VROOM.Converters
             return new MatrixIndex(row, col);
         }
 
-        public override void Write(Utf8JsonWriter writer, MatrixIndex value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, MatrixIndex value, JsonSerializer serializer)
         {
             writer.WriteStartArray();
-            writer.WriteNumberValue(value.Row);
-            writer.WriteNumberValue(value.Column);
+            writer.WriteValue(value.Row);
+            writer.WriteValue(value.Column);
             writer.WriteEndArray();
         }
     }

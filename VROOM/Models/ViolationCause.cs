@@ -1,5 +1,5 @@
-﻿using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Runtime.Serialization;
 using VROOM.Converters;
 
 namespace VROOM

@@ -1,19 +1,24 @@
-﻿using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace VROOM.Converters
 {
     public class DateTimeOffsetToUnixConverter : JsonConverter<DateTimeOffset>
     {
-        public override DateTimeOffset Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DateTimeOffset ReadJson(JsonReader reader, Type objectType, DateTimeOffset existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            return DateTimeOffset.FromUnixTimeSeconds(reader.GetInt64());
+            if (reader.TokenType != JsonToken.Integer)
+            {
+                throw new JsonException("Expected integer for DateTimeOffset conversion.");
+            }
+
+            long unixTime = Convert.ToInt64(reader.Value);
+            return DateTimeOffset.FromUnixTimeSeconds(unixTime);
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTimeOffset value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, DateTimeOffset value, JsonSerializer serializer)
         {
-            writer.WriteNumberValue(value.ToUnixTimeSeconds());
+            writer.WriteValue(value.ToUnixTimeSeconds());
         }
     }
 }

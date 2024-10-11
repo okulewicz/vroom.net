@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace VROOM.API
@@ -11,10 +11,9 @@ namespace VROOM.API
     {
         private readonly string _host;
         private readonly HttpClient _client;
-        private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions()
+        private readonly JsonSerializerSettings _serializerOptions = new JsonSerializerSettings()
         {
-            IgnoreNullValues = true,
-            PropertyNameCaseInsensitive = true
+            NullValueHandling = NullValueHandling.Ignore,
         };
         
         public VroomApiClient(string host)
@@ -36,17 +35,17 @@ namespace VROOM.API
 
         public async Task<VroomOutput> PerformRequest(VroomInput vroomInput)
         {
-            string input = JsonSerializer.Serialize(vroomInput, _serializerOptions);
+            string input = JsonConvert.SerializeObject(vroomInput, _serializerOptions);
             var response = await _client.PostAsync(_host,
                 new StringContent(input, Encoding.UTF8, "application/json"));
 
             string content = await response.Content.ReadAsStringAsync();
-            var output = JsonSerializer.Deserialize<VroomOutput>(content, _serializerOptions);
+            var output = JsonConvert.DeserializeObject<VroomOutput>(content, _serializerOptions);
             
             if (response.StatusCode != HttpStatusCode.OK)
             {
                 throw new Exception($"Server responded with status code {response.StatusCode}. Content: " +
-                                    JsonSerializer.Serialize(output, _serializerOptions));
+                                    JsonConvert.SerializeObject(output, _serializerOptions));
             }
 
             return output;

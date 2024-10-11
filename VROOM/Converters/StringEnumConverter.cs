@@ -1,20 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Runtime.Serialization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace VROOM.Converters
 {
     public class StringEnumConverter<T> : JsonConverter<T> where T : struct, Enum
     {
-        public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override T ReadJson(JsonReader reader, Type objectType, T existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            string s = reader.GetString();
+            string s = reader.ReadAsString();
             if (Enum.TryParse(s, out T parsedVal))
             {
                 return parsedVal;
             }
-            
+
             var values = Enum.GetValues(typeof(T));
             foreach (var value in values)
             {
@@ -23,7 +22,7 @@ namespace VROOM.Converters
                 {
                     if (s == enumMemberAttribute.Value)
                     {
-                        return (T) value;
+                        return (T)value;
                     }
                 }
             }
@@ -31,10 +30,10 @@ namespace VROOM.Converters
             throw new JsonException($"Could not find enum value {s} in {typeof(T)}");
         }
 
-        public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+        public override void WriteJson(JsonWriter writer, T value, JsonSerializer serializer)
         {
             var enumMemberAttribute = value.GetAttributeFromEnumValue<EnumMemberAttribute>();
-            writer.WriteStringValue(enumMemberAttribute != null ? enumMemberAttribute.Value : value.ToString());
+            writer.WriteValue(enumMemberAttribute != null ? enumMemberAttribute.Value : value.ToString());
         }
     }
 }

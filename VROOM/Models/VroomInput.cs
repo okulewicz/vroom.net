@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace VROOM
 {
@@ -8,25 +8,25 @@ namespace VROOM
         /// <summary>
         /// List of job objects describing the places to visit.
         /// </summary>
-        [JsonPropertyName("jobs")]
+        [JsonProperty("jobs")]
         public List<Job> Jobs { get; set; }
         
         /// <summary>
         /// List of shipment objects describing pickup and delivery tasks.
         /// </summary>
-        [JsonPropertyName("shipments")]
+        [JsonProperty("shipments")]
         public List<Shipment> Shipments { get; set; }
         
         /// <summary>
         /// List of vehicle objects describing the available vehicles.
         /// </summary>
-        [JsonPropertyName("vehicles")]
+        [JsonProperty("vehicles")]
         public List<Vehicle> Vehicles { get; set; }
         
         /// <summary>
         /// Optional description of per-profile custom matrices. Key is vehicle profile type.
         /// </summary>
-        [JsonPropertyName("matrices")]
-        public Dictionary<string, Matrice>? Matrices { get; set; }
+        [JsonProperty("matrices")]
+        public Dictionary<string, Matrice> Matrices { get; set; }
     }
 }

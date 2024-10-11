@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+using Newtonsoft.Json;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VROOM.Converters;
@@ -19,7 +18,7 @@ namespace VROOM.Tests
             new DateTimeOffset(1980, 1, 11, 20, 59, 0, 0, new TimeSpan()),
             null
         };
-        
+
         [TestMethod]
         public void CanSerialize()
         {
@@ -27,30 +26,29 @@ namespace VROOM.Tests
 
             foreach (var value in TestValues)
             {
-                using MemoryStream stream = new MemoryStream();
-                using Utf8JsonWriter writer = new Utf8JsonWriter(stream);
+                StringBuilder sb = new StringBuilder();
+                using StringWriter sw = new StringWriter(sb);
+                using JsonTextWriter writer = new JsonTextWriter(sw);
 
-                converter.Write(writer, value, new JsonSerializerOptions());
+                converter.WriteJson(writer, value, new JsonSerializer());
 
                 writer.Flush();
-                stream.Position = 0;
-
-                using TextReader reader = new StreamReader(stream);
-                string result = reader.ReadToEnd();
+                string result = sb.ToString();
 
                 result.Should().Be(value?.ToUnixTimeSeconds().ToString() ?? "null");
             }
         }
-        
+
         [TestMethod]
         public void CanDeserialize()
         {
             NullableDateTimeOffsetToUnixConverter converter = new NullableDateTimeOffsetToUnixConverter();
             foreach (var value in TestValues)
             {
-                Utf8JsonReader reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(value?.ToUnixTimeSeconds().ToString() ?? "null"));
+                string json = value?.ToUnixTimeSeconds().ToString() ?? "null";
+                using JsonTextReader reader = new JsonTextReader(new StringReader(json));
                 reader.Read();
-                var result = converter.Read(ref reader, typeof(DateTimeOffset), new JsonSerializerOptions());
+                var result = converter.ReadJson(reader, typeof(DateTimeOffset?), null, new JsonSerializer());
 
                 result.Should().Be(value);
             }

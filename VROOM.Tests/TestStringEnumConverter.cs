@@ -3,9 +3,9 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Text.Json;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using VROOM.Converters;
 
 namespace VROOM.Tests
@@ -27,9 +27,11 @@ namespace VROOM.Tests
             foreach (var value in TestValues)
             {
                 using MemoryStream stream = new MemoryStream();
-                using Utf8JsonWriter writer = new Utf8JsonWriter(stream);
+                //initialize json writer with stream
 
-                converter.Write(writer, (ViolationCause) value, new JsonSerializerOptions());
+                using JsonWriter writer = new JsonTextWriter(new StreamWriter(stream));
+
+                converter.WriteJson(writer, (ViolationCause) value, new JsonSerializer());
 
                 writer.Flush();
                 stream.Position = 0;
@@ -47,12 +49,11 @@ namespace VROOM.Tests
             StringEnumConverter<ViolationCause> converter = new StringEnumConverter<ViolationCause>();
             foreach (var value in TestValues)
             {
-                Utf8JsonReader reader =
-                    new Utf8JsonReader(
-                        Encoding.UTF8.GetBytes(
+                JsonTextReader reader =
+                    new JsonTextReader(new StringReader(
                             '"' + value.GetAttributeFromEnumValue<EnumMemberAttribute>()?.Value + '"'));
                 reader.Read();
-                var result = converter.Read(ref reader, typeof(ViolationCause), new JsonSerializerOptions());
+                var result = converter.ReadJson( reader, typeof(ViolationCause), null, new JsonSerializer());
 
                 result.Should().BeEquivalentTo(value);
             }

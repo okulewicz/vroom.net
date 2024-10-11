@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 using VROOM.Converters;
 
 namespace VROOM
@@ -10,64 +10,64 @@ namespace VROOM
         /// <summary>
         /// Total cost for all routes.
         /// </summary>
-        [JsonPropertyName("cost")]
+        [JsonProperty("cost")]
         public int Cost { get; set; }
         
         /// <summary>
         /// Number of tasks that could not be served.
         /// </summary>
-        [JsonPropertyName("unassigned")]
+        [JsonProperty("unassigned")]
         public int Unassigned { get; set; }
         
         /// <summary>
         /// Total service time for all routes.
         /// </summary>
-        [JsonPropertyName("service")]
+        [JsonProperty("service")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan Service { get; set; }
         
         /// <summary>
         /// Total travel time for all routes.
         /// </summary>
-        [JsonPropertyName("duration")]
+        [JsonProperty("duration")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan Duration { get; set; }
         
         /// <summary>
         /// Total waiting time for all routes.
         /// </summary>
-        [JsonPropertyName("waiting_time")]
+        [JsonProperty("waiting_time")]
         [JsonConverter(typeof(TimeSpanSecondsToIntConverter))]
         public TimeSpan WaitingTime { get; set; }
         
         /// <summary>
         /// Total priority sum for all assigned tasks.
         /// </summary>
-        [JsonPropertyName("priority")]
+        [JsonProperty("priority")]
         public int Priority { get; set; }
         
         /// <summary>
         /// List of violation objects for all routes.
         /// </summary>
-        [JsonPropertyName("violations")]
-        public List<Violation> Violations { get; set; } = null!;
+        [JsonProperty("violations")]
+        public List<Violation> Violations { get; set; } = null;
         
         /// <summary>
         /// Total delivery for all routes.
         /// </summary>
-        [JsonPropertyName("delivery")]
-        public List<int>? Delivery { get; set; }
+        [JsonProperty("delivery")]
+        public List<int> Delivery { get; set; }
         
         /// <summary>
         /// Total pickup for all routes.
         /// </summary>
-        [JsonPropertyName("pickup")]
-        public int[]? Pickup { get; set; }
+        [JsonProperty("pickup")]
+        public int[] Pickup { get; set; }
         
         /// <summary>
         /// Total distance for all routes.
         /// </summary>
-        [JsonPropertyName("distance")]
+        [JsonProperty("distance")]
         public int? Distance { get; set; }
     }
 }

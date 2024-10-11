@@ -1,9 +1,9 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Text.Json;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using VROOM.Converters;
 
 namespace VROOM.Tests
@@ -21,9 +21,9 @@ namespace VROOM.Tests
             PriorityConverter converter = new PriorityConverter();
 
             using MemoryStream stream = new MemoryStream();
-            using Utf8JsonWriter writer = new Utf8JsonWriter(stream);
+            using var writer = new JsonTextWriter(new StreamWriter(stream));
             
-            converter.Write(writer, new Priority(val), new JsonSerializerOptions());
+            converter.WriteJson(writer, new Priority(val), new JsonSerializer());
             
             writer.Flush();
             stream.Position = 0;
@@ -42,11 +42,11 @@ namespace VROOM.Tests
         {
             PriorityConverter converter = new PriorityConverter();
 
-            Utf8JsonReader reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(val.ToString()));
+            var reader = new JsonTextReader(new StringReader(val.ToString()));
             reader.Read();
-            var result = converter.Read(ref reader, typeof(Priority), new JsonSerializerOptions());
+            var result = converter.ReadJson(reader, typeof(Priority), null, new JsonSerializer());
 
-            result.Value.Should().Be(val);
+            result.Should().Be(val);
         }
     }
 }
