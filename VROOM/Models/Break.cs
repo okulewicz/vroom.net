@@ -23,7 +23,7 @@ namespace VROOM
         /// A list of TimeWindows describing valid slots for break start.
         /// </summary>
         [JsonProperty("time_windows")]
-        public List<TimeWindow> TimeWindows { get; set; }
+        public List<int[]> TimeWindows { get; set; }
         
         /// <summary>
         /// The break duration (in VROOM this is "service").

@@ -65,6 +65,6 @@ namespace VROOM
         /// List of timewindows describing valid slots for job service start.
         /// </summary>
         [JsonProperty("time_windows")]
-        public List<TimeWindow> TimeWindows { get; set; }
+        public List<int[]> TimeWindows { get; set; }
     }
 }
