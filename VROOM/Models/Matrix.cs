@@ -6,9 +6,9 @@ namespace VROOM
     {
         [JsonProperty("durations")]
         public int[][] Durations { get; set; }
-        [JsonProperty("distances ")]
+        [JsonProperty("distances")]
         public int[][] Distances { get; set; }
-        [JsonProperty("costs ")]
+        [JsonProperty("costs")]
         public int[][] Costs { get; set; }
     }
 }

@@ -63,7 +63,7 @@ namespace VROOM
         /// The possible working hours of the vehicle.
         /// </summary>
         [JsonProperty("time_window")]
-        public TimeWindow? TimeWindow { get; set; }
+        public int[] TimeWindow { get; set; }
 
         /// <summary>
         /// A list of break objects.

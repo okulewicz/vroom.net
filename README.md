@@ -27,6 +27,10 @@ public async Task Run()
                 Id = id++,
                 Location = new Coordinate(151.7735849, -32.9337431),
                 LocationIndex = 1
+                TimeWindows = new List<int[]>()
+                    {
+                        new int[] {0, 1000 }
+                    }
             },
             new Job()
             {

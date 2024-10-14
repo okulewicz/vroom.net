@@ -17,7 +17,11 @@ namespace VROOM.Run
                     {
                         Id = id++,
                         Location = new Coordinate(151.7735849, -32.9337431),
-                        LocationIndex = 1
+                        LocationIndex = 1,
+                        TimeWindows = new List<int[]>()
+                        {
+                            new int[] {0, 1000 }
+                        }
                     },
                     new Job()
                     {
@@ -65,7 +69,17 @@ namespace VROOM.Run
 
             var result = await apiClient.PerformRequest(input);
 
-            // do something with the result...
+            if (result.WasSuccessful)
+            {
+                foreach (var route in result.Routes)
+                {
+                    Console.WriteLine($"Route {route.VehicleId}");
+                    foreach (var step in route.Steps)
+                    {
+                        Console.WriteLine($"{step.StepType} {step.LocationIndex}");
+                    }
+                }
+            }
         }
         static void Main(string[] args)
         {
