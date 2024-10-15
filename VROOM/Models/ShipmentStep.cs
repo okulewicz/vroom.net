@@ -32,11 +32,16 @@ namespace VROOM
         public int? LocationIndex { get; set; }
         
         /// <summary>
-        /// Shipment step service duration.
+        /// Shipment step service duration (time of given task).
         /// </summary>
         [JsonProperty("service")]
         public int Service { get; set; }
-        
+        /// <summary>
+        /// Shipment setup service duration (base time for visiting a given location).
+        /// </summary>
+        [JsonProperty("setup")]
+        public int Setup { get; set; }
+
         /// <summary>
         /// List of timewindows describing valid slots for job service start.
         /// </summary>
