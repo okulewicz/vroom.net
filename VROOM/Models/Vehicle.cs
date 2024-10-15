@@ -66,6 +66,22 @@ namespace VROOM
         public int[] TimeWindow { get; set; }
 
         /// <summary>
+        /// an integer defining the maximum number of tasks in a route for this vehicle
+        /// </summary>
+        [JsonProperty("max_tasks")]
+        public int? MaxTasks { get; set; }
+        /// <summary>
+        /// an integer defining the maximum travel time for this vehicle
+        /// </summary>
+        [JsonProperty("max_travel_time")]
+        public int? MaxTravelTime { get; set; }
+        /// <summary>
+        /// an integer defining the maximum distance for this vehicle/// </summary>
+        [JsonProperty("max_distance")]
+        public int? MaxDistance { get; set; }
+
+
+        /// <summary>
         /// A list of break objects.
         /// </summary>
         [JsonProperty("breaks")]
