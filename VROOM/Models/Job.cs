@@ -35,8 +35,13 @@ namespace VROOM
         /// Job service duration. In VROOM this is the "service" property.
         /// </summary>
         [JsonProperty("service")]
-        public int? Duration { get; set; }
-        
+        public int Service { get; set; }
+        /// <summary>
+        /// Job setup duration
+        /// </summary>
+        [JsonProperty("setup")]
+        public int Setup { get; set; }
+
         /// <summary>
         /// List of ints describing multidimensional quantities for delivery.
         /// </summary>
