@@ -30,6 +30,11 @@ namespace VROOM
         /// </summary>
         [JsonProperty("service")]
         public int Service { get; set; }
+        /// <summary>
+        /// Total setup time for this route.
+        /// </summary>
+        [JsonProperty("setup")]
+        public int Setup { get; set; }
 
         /// <summary>
         /// Total travel time for this route.
