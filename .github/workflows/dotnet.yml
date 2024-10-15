@@ -27,7 +27,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Pack
-      run: dotnet pack --configuration Release --no-build --output ./output
+      run: dotnet pack --configuration Release --output ./output
     - name: Publish to NuGet
       env:
        NUGET_KEY: ${{ secrets.NUGET_KEY }}
