@@ -64,6 +64,11 @@ namespace VROOM.Run
                         ],
                     }
                 }
+                },
+                Options = new VROOM.Models.Options()
+                {
+                    Threads = 16,
+                    Explore = 5
                 }
             };
 
