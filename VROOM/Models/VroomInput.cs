@@ -28,5 +28,10 @@ namespace VROOM
         /// </summary>
         [JsonProperty("matrices")]
         public Dictionary<string, Matrix> Matrices { get; set; }
+        /// <summary>
+        /// Parameters for controlling the vroom
+        /// </summary>
+        [JsonProperty("options")]
+        public VROOM.Models.Options Options { get; set; }
     }
 }

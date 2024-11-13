@@ -30,7 +30,12 @@ namespace VROOM
         /// </summary>
         [JsonProperty("service")]
         public int Service { get; set; }
-        
+        /// <summary>
+        /// Setup time at this step.
+        /// </summary>
+        [JsonProperty("setup")]
+        public int Setup { get; set; }
+
         /// <summary>
         /// Waiting time upon arrival at this step.
         /// </summary>
