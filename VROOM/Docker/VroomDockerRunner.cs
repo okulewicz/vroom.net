@@ -16,6 +16,18 @@ namespace VROOM.Docker
         {
             using (var client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient())
             {
+                var images = await client.Images.ListImagesAsync(new ImagesListParameters() { All = true });
+                var imageExists = images.Any(img => img.RepoTags.Contains("ghcr.io/vroom-project/vroom-docker:v1.14.0"));
+
+                if (!imageExists)
+                {
+                    Console.WriteLine("Downloading Docker image...");
+                    await client.Images.CreateImageAsync(
+                        new ImagesCreateParameters { FromImage = "ghcr.io/vroom-project/vroom-docker", Tag = "v1.14.0" },
+                        null,
+                        new Progress<JSONMessage>(message => Console.WriteLine(message.Status))
+                    );
+                }
                 var containers = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true });
                 var existingContainer = containers.FirstOrDefault(c => c.Image == "ghcr.io/vroom-project/vroom-docker:v1.14.0");
 
@@ -57,7 +69,7 @@ namespace VROOM.Docker
                         {
                             { "3000/tcp", new List<PortBinding> { new PortBinding { HostPort = VROOM_PORT.ToString() } } }
                         }
-                    }
+                    }                    
                 };
 
                 var response = await client.Containers.CreateContainerAsync(parameters);
