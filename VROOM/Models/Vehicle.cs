@@ -12,6 +12,12 @@ namespace VROOM
         public uint Id { get; set; }
 
         /// <summary>
+        /// A cost object defining costs for this vehicle
+        /// </summary>
+        [JsonProperty("costs")]
+        public Cost Costs { get; set; }
+
+        /// <summary>
         /// The routing profile to use. Defaults to car.
         /// </summary>
         [JsonProperty("profile")]

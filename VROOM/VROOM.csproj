@@ -6,7 +6,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<VersionPrefix>1.0.7</VersionPrefix>
+		<VersionPrefix>1.10.0</VersionPrefix>
         <Authors>Caleb Faith, Michał Okulewicz</Authors>
         <PackageId>VROOM.NET.2.0</PackageId>
         <Title>Port of VROOM.NET for .NET Standard 2.0+</Title>
@@ -24,11 +24,25 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Docker.DotNet" Version="3.125.15" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     </ItemGroup>
 
 	<ItemGroup>
-		<None Include="../README.md" Pack="true" PackagePath="/"/>
+		<None Include="../README.md" Pack="true" PackagePath="/" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Docker\log\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Docker\config\config.yml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Docker\log\.gitkeep">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>
