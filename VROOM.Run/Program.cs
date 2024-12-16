@@ -1,4 +1,5 @@
 ﻿using VROOM.API;
+using VROOM.Docker;
 
 namespace VROOM.Run
 {
@@ -6,6 +7,7 @@ namespace VROOM.Run
     {
         public static async Task Run()
         {
+            VroomDockerRunner.RunDockerContainer().Wait();
             VroomApiClient apiClient = new VroomApiClient("http://localhost:3000");
             uint id = 0;
 
