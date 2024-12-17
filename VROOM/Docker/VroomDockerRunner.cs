@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,7 +15,11 @@ namespace VROOM.Docker
         public const int VROOM_PORT = 3000;
         public static async Task RunDockerContainer()
         {
-            using (var client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient())
+            string dockerUri = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? "npipe://./pipe/docker_engine"
+                : "unix:///var/run/docker.sock";
+
+            using (var client = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient())
             {
                 var images = await client.Images.ListImagesAsync(new ImagesListParameters() { All = true });
                 var imageExists = images.Any(img => img.RepoTags.Contains("ghcr.io/vroom-project/vroom-docker:v1.14.0"));
@@ -69,7 +74,7 @@ namespace VROOM.Docker
                         {
                             { "3000/tcp", new List<PortBinding> { new PortBinding { HostPort = VROOM_PORT.ToString() } } }
                         }
-                    }                    
+                    }
                 };
 
                 var response = await client.Containers.CreateContainerAsync(parameters);
