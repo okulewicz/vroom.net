@@ -31,6 +31,7 @@ namespace VROOM.API
             _host = host;
 
             _client = new HttpClient();
+            _client.Timeout = TimeSpan.FromMinutes(60);
         }
 
         public async Task<VroomOutput> PerformRequest(VroomInput vroomInput)
