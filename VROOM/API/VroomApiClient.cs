@@ -16,7 +16,12 @@ namespace VROOM.API
             NullValueHandling = NullValueHandling.Ignore,
         };
         
-        public VroomApiClient(string host)
+        public VroomApiClient(string host):
+            this(host, 3600)
+        {
+        }
+
+        public VroomApiClient(string host, int secondsTimeout)
         {
             if (string.IsNullOrEmpty(host))
             {
@@ -31,7 +36,7 @@ namespace VROOM.API
             _host = host;
 
             _client = new HttpClient();
-            _client.Timeout = TimeSpan.FromMinutes(60);
+            _client.Timeout = TimeSpan.FromSeconds(secondsTimeout);
         }
 
         public async Task<VroomOutput> PerformRequest(VroomInput vroomInput)
