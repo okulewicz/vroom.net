@@ -6,7 +6,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<VersionPrefix>1.10.2</VersionPrefix>
+		<VersionPrefix>1.10.3</VersionPrefix>
         <Authors>Caleb Faith, Michał Okulewicz</Authors>
         <PackageId>VROOM.NET.2.0</PackageId>
         <Title>Port of VROOM.NET for .NET Standard 2.0+</Title>
