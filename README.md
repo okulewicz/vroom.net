@@ -86,6 +86,7 @@ Contributions are welcome, please feel free to open new issues or submit pull re
 
 Main contributors:
 * [Caleb Faith](https://github.com/calebfaith)
+* [Micha³ Okulewicz](https://github.com/okulewicz)
 
 # License
 
