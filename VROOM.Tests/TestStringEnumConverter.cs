@@ -52,6 +52,7 @@ namespace VROOM.Tests
                 JsonTextReader reader =
                     new JsonTextReader(new StringReader(
                             '"' + value.GetAttributeFromEnumValue<EnumMemberAttribute>()?.Value + '"'));
+                reader.Read();
                 var result = converter.ReadJson( reader, typeof(ViolationCause), null, new JsonSerializer());
 
                 result.Should().BeEquivalentTo(value);

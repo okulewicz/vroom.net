@@ -84,6 +84,26 @@ namespace VROOM.Docker
             }
         }
 
+
+        public static async Task StopDockerContainer()
+        {
+            string dockerUri = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+    ? "npipe://./pipe/docker_engine"
+    : "unix:///var/run/docker.sock";
+
+            using (var client = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient())
+            {
+                var containers = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true });
+                var existingContainer = containers.FirstOrDefault(c => c.Image == $"{DOCKER_IMAGE_NAME}:{DOCKER_IMAGE_VERSION}");
+                if (existingContainer != null)
+                {
+                    if (existingContainer.State == "running")
+                        await client.Containers.StopContainerAsync(existingContainer.ID, new ContainerStopParameters());
+                    return;
+                }
+            }
+        }
+
         private static void SetupVolumes(out string confFolder, out string logFolder)
         {
             var currentFolder = new DirectoryInfo(".").FullName;
