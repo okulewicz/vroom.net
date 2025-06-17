@@ -15,6 +15,6 @@ namespace VROOM.Models
         [JsonProperty("x")]
         public int Explore { get; set; }
         [JsonProperty("c")]
-        public bool PlanMode { get; set; }
+        public bool? PlanMode { get; set; }
     }
 }
