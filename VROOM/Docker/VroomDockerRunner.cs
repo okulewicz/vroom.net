@@ -94,9 +94,7 @@ namespace VROOM.Docker
             using (var client = new DockerClientConfiguration(new Uri(dockerUri)).CreateClient())
             {
                 var containers = await client.Containers.ListContainersAsync(new ContainersListParameters() { All = true });
-
-                //TU JEST BŁĄD
-                var existingContainer = containers.FirstOrDefault(c => c.Image == $"{DOCKER_IMAGE_NAME}:{DOCKER_IMAGE_VERSION}"));
+                var existingContainer = containers.FirstOrDefault(c => c.Image == $"{DOCKER_IMAGE_NAME}:{DOCKER_IMAGE_VERSION}");
                 if (existingContainer != null)
                 {
                     if (existingContainer.State == "running")

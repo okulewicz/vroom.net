@@ -8,7 +8,7 @@ namespace VROOM.Converters
     {
         public override T ReadJson(JsonReader reader, Type objectType, T existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            string s = reader.ReadAsString();
+            string s = reader.Value.ToString();
             if (Enum.TryParse(s, out T parsedVal))
             {
                 return parsedVal;

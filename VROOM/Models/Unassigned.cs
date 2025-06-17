@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using VROOM.Converters;
 
 namespace VROOM
 {
@@ -8,7 +9,7 @@ namespace VROOM
         public uint Id { get; set; }
         
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public StepType Type { get; set; }
         
         [JsonProperty("location")]
         public Coordinate? Location { get; set; }
